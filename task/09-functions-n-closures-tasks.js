@@ -69,7 +69,7 @@ function getPowerFunction(exponent) {
  *   getPolynom()      => null
  */
 function getPolynom() {
-    var args = arguments;
+    let args = arguments;
     return function(x) {
         return Array.prototype.reduce.call(args, function (res, curr, index, array) {
             return res + curr * Math.pow(x, array.length - 1 - index);
@@ -93,7 +93,7 @@ function getPolynom() {
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
 function memoize(func) {
-    var mem;
+    let mem;
     return function () {
         if (mem == undefined) {
             mem = func.apply(null, arguments);
@@ -120,7 +120,7 @@ function memoize(func) {
  */
 function retry(func, attempts) {
     return function() {
-        var i = 0, tmp;
+        let i = 0, tmp;
         while (i <= attempts) {
             try {
                 tmp = func.apply(null, arguments);
@@ -159,8 +159,8 @@ function retry(func, attempts) {
  */
 function logger(func, logFunc) {
     return function() {
-        var res;
-        var args = Array.prototype.reduce.call(arguments, function (res, curr) {
+        let res;
+        let args = Array.prototype.reduce.call(arguments, function (res, curr) {
             return res ===''? res += JSON.stringify(curr) : res += ',' + JSON.stringify(curr);
         }, '');
         logFunc(func.name + "(" + args + ") starts");
@@ -185,7 +185,7 @@ function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
 function partialUsingArguments(fn) {
-    var applyArgs = Array.prototype.slice.call(arguments, 1);
+    let applyArgs = Array.prototype.slice.call(arguments, 1);
     return function() {
         return fn.apply(null, Array.prototype.concat(applyArgs, Array.prototype.slice.call(arguments)));
     };
@@ -209,7 +209,7 @@ function partialUsingArguments(fn) {
  *   getId10() => 11
  */
 function getIdGeneratorFunction(startFrom) {
-    var curr = startFrom;
+    let curr = startFrom;
     return function() {
         return startFrom++;
     }
